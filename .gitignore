@@ -1,0 +1,36 @@
+# Archivos de Python
+*.pyc
+*.pyo
+__pycache__/
+*.so
+
+# Entorno virtual
+venv/
+env/
+ENV/
+
+# Base de datos SQLite
+*.sqlite3
+db.sqlite3
+
+# Archivos de Django
+*.log
+local_settings.py
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Archivos de IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Carpeta de medios
+media/
+
+# Archivos estáticos recopilados
+staticfiles/
