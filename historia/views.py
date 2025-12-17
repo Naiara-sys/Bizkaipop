@@ -65,7 +65,7 @@ def mision(request):
     return render(request, 'historia/final.html', contexto)
 
 #Final malo
-def mision(request):
+def final_malo(request):
     contexto = {
         'titulo': 'La Oscuridad Prevalece',
         'texto': 'Decides que la responsabilidad es demasiado grande y huyes del castillo. Sin tu ayuda, Zelda es capturada por Ganondorf. El villano obtiene la Trifuerza y transforma Hyrule en un reino de sombras y desesperación. Los campos verdes se marchitan, el cielo se oscurece eternamente y el pueblo sufre bajo su tirnía. Tu cobardía ha condenado a Hyrule a una era de oscuridad infinita...',

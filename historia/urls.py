@@ -30,6 +30,6 @@ urlpatterns = [
         path('lago/', views.lago, name='lago'),
         path('mision/', views.mision, name='mision'),
         #Ruta final malo
-        path('final-malo/', views.final_malo, name='final_malo'),
+        path('final_malo/', views.final_malo, name='final_malo'),
         
 ]
