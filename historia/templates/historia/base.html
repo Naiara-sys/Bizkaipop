@@ -1,0 +1,138 @@
+<!DOCTYPE html> <!--PASO 12: Plantilla Base -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> The Legend of Zelda </title>
+
+    <style>
+        *{
+            marrgin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Trebuchet MS', Arial, sans-serif;
+            backgroung: linea-gradient
+
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            aling-items: center;
+            color:  #f5f5dc;
+        }
+
+        /*Contenedor principal*/
+        .contenedor {
+            backgroung: rgba(0, 0, 0, 0.7);
+            border: 3px solid #d4af37;
+            border-radius: 15px;
+            max-width: 90%%;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0, 0.8);
+            text-aling: center;
+        }
+
+        h1 {
+            color: #ffd700; 
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 10px;
+        }
+
+        .imagen-historia {
+            width: 100%%;
+            max-width: 500px;
+            height: 300px;
+            object-fit: cover; /*Ajustar imagen sin deformar*/
+            border: 3px solid #d4af37;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .texto-historia {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin: 25px 0;
+            text-aling: justify;
+            padding: 0 20px;
+        }
+
+        /*Botones*/
+        .botones {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .boton {
+            backgroung: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            color: white;
+            border: 2px solid #d4af37;
+            padding: 15px 30px;
+            font-size; 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .boton:hover {
+            backgroung: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%);
+            transform: translateY(-3px); /* Efecto de elevación */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            border-color: #ffd700;
+        }
+
+        /*Boton reinicio*/
+        .boton-reinicio {
+            backgroung: linea-gradient (35deg, #c62828 0%, #8e0000 100%);
+        }
+
+        .boton-reinicio:hover {
+            backgroung: linear-gradient (135deg, #d32f2f 0%, #c62828 100%);
+        }
+
+        /*Estilos finales*/
+
+        .final-bueno {
+            border-color: #4caf50;
+        }
+
+        .final-malo {
+            border-color: #f44336;
+        }
+
+        .final-epico {
+            border-color: #ffd700;
+            animation: brillo 2s infinite;
+        }
+
+        /*Animaciones final epico*/
+
+        @keyframes brillo {
+            0%%, 100%% {box-shadow: 0 0 20px #ffd700; }
+            50%% {box-shadow: 0 0 40px #ffd700;}
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="contenedor">
+        <!--Aqui se inserta el contenido especifico de cada pagina.html
+            Esto cambia en cada template hijo-->
+        {% block content%}
+        {% endblock %}
+    <div>
+</body>
+</html>
