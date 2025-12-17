@@ -24,7 +24,7 @@ urlpatterns = [
         #PASO 16: Actualizar las urls (itslucyax)
         #Rutas exploracion
         path('bosque/', views.bosque, name='bosque'),
-        path('cueva/', views.cueva, name='castillo'),
+        path('castillo/', views.castillo, name='castillo'),
         #Rutas desarrollo
         path('templo/', views.templo, name='templo'),
         path('lago/', views.lago, name='lago'),
