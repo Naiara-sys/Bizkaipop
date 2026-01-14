@@ -65,3 +65,18 @@ def home_view(request):
     }
     
     return render(request, 'home.html', context)
+
+
+
+# ===== DEV 3: CATÁLOGO =====
+
+def catalog_view(request):
+    return render(request, 'catalog.html')
+
+
+def product_detail_view(request, product_id):
+    return render(request, 'product_detail.html')
+
+
+def publish_product_view(request):
+    return render(request, 'publish_product.html')
