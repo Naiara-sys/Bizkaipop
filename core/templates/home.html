@@ -1,0 +1,81 @@
+<!--itslucyax-->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inicio - Bizkaipop{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">Compra y vende en <span class="highlight">Bizkaia</span></h1>
+            <p class="hero-subtitle">El marketplace local donde encontrarás lo que buscas</p>
+            
+            <!-- Buscador principal -->
+            <div class="search-bar">
+                <input type="text" placeholder="¿Qué estás buscando?" class="search-input">
+                <button class="btn btn-primary">Buscar</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categorías Populares -->
+<section class="categories-section">
+    <div class="container">
+        <h2 class="section-title">Categorías populares</h2>
+        
+        <div class="categories-grid">
+            {% for categoria in categorias %}
+            <a href="#" class="category-card">
+                <span class="category-icon">{{ categoria.icono }}</span>
+                <span class="category-name">{{ categoria.nombre }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Productos Destacados -->
+<section class="products-section">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Productos destacados</h2>
+            <a href="#" class="btn btn-outline">Ver todos</a>
+        </div>
+        
+        <div class="products-grid">
+            {% for producto in productos %}
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="{{ producto.imagen }}" alt="{{ producto.titulo }}">
+                    <span class="product-badge">Destacado</span>
+                </div>
+                
+                <div class="product-info">
+                    <h3 class="product-title">{{ producto.titulo }}</h3>
+                    <p class="product-location">📍 {{ producto.ubicacion }}</p>
+                    <p class="product-price">{{ producto.precio }}€</p>
+                </div>
+                
+                <div class="product-actions">
+                    <a href="#" class="btn btn-primary btn-block">Ver detalles</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-content">
+            <h2>¿Tienes algo que vender?</h2>
+            <p>Publica tu anuncio gratis y llega a miles de compradores en Bizkaia</p>
+            <a href="#" class="btn btn-primary btn-large">Publicar ahora</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
