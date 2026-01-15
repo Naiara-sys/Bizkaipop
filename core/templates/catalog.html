@@ -14,7 +14,11 @@
             {% for product in products %}
             <div class="product-card">
                 <div class="product-image">
-                    <img src="https://via.placeholder.com/300x200?text=Producto" alt="{{ product.title }}">
+                    {% if product.images.first %}
+                    <img src="{{ product.images.first.image.url }}" alt="{{ product.title }}">
+                      {% else %}
+                      <img src="https://via.placeholder.com/300x200?text=Producto" alt="Sin imagen">
+                      {% endif %}
                 </div>
 
                 <div class="product-info">
