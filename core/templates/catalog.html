@@ -1,1 +1,12 @@
-<h1>Catálogo de productos</h1>
+<h1>Catálogo</h1>
+
+{% for product in products %}
+  <div>
+    <h3>{{ product.title }}</h3>
+    <p>{{ product.price }} €</p>
+    <p>{{ product.location }}</p>
+    <a href="{% url 'product_detail' product.id %}">Ver producto</a>
+  </div>
+{% empty %}
+  <p>No hay productos todavía.</p>
+{% endfor %}
