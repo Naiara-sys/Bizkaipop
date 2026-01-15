@@ -486,4 +486,11 @@ a:hover {
         align-items: flex-start;
         gap: var(--spacing-sm);
     }
+
+    .product-detail-images img {
+    width: 50%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: block;
+}
 }
