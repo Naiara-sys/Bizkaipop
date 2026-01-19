@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ product.title }} - Bizkaipop{% endblock %}
+
+{% block content %}
+<section class="product-detail">
+    <div class="container">
+
+        <a href="{% url 'catalog' %}" class="btn btn-outline">
+            ← Volver al catálogo
+        </a>
+
+        <div class="product-detail-grid">
+            <!-- Imágenes -->
+            <div class="product-detail-images">
+                {% if product.images.all %}
+                    {% for img in product.images.all %}
+                        <img src="{{ img.image.url }}" alt="{{ product.title }}">
+                    {% endfor %}
+                {% else %}
+                    <img src="https://via.placeholder.com/400x300?text=Sin+imagen">
+                {% endif %}
+            </div>
+
+            <!-- Info -->
+            <div class="product-detail-info">
+                <h1>{{ product.title }}</h1>
+                <p class="product-price">{{ product.price }} €</p>
+                <p class="product-location">📍 {{ product.location }}</p>
+
+                <div class="product-description">
+                    <h3>Descripción</h3>
+                    <p>{{ product.description }}</p>
+                </div>
+
+                <button class="btn btn-primary btn-large">
+                    Contactar con el vendedor
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
