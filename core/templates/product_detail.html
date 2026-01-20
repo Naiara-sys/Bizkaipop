@@ -3,6 +3,9 @@
 
 {% block title %}{{ product.title }} - Bizkaipop{% endblock %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock %}
 {% block content %}
 <section class="product-detail">
     <div class="container">
