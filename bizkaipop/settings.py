@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', #itslucyax
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,6 +123,35 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#CONFIGURACION DEPLOYMENT
+import os
+import dj_database_url
+
+#Config archivos estaticos produccion
+STATTIC_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+#Config Railway/Render
+if 'RAILWAY_ENVIROMENT' in os.environ or 'RENDER' in os.environ:
+    #permitir dominio produccion
+    ALLOWED_HOSTS.append('.railway.app')
+    ALLOWED_HOSTS.append('.onrender.com')
+    
+    #usar BBDD produccion (si existe)
+    if 'DATABASE_URL' in os.environ:
+        DATABASES['default'] = dj_database_url.config(
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    #config seguridad produccion
+    DEBUG = False
+    SECURE_SSL:REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+else:
+    #Config desarrollo local
+    DEBUG = True
+
 
 STATIC_URL = '/static/'
 STATTIC_ROOT = BASE_DIR / 'staticfiles'
