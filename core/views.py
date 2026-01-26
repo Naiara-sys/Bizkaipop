@@ -1,26 +1,37 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Product, Category
 
-# Create your views here.
-#itslucyax
 
+
+
+from .models import Product, Category
 
 def home_view(request):
     productos_destacados = Product.objects.filter(is_sold=False)[:6]
+    categorias = Category.objects.all()
 
-    categorias_populares = [
-        {'nombre': 'Electrónica', 'icono': '📱', 'slug': 'electronica'},
-        {'nombre': 'Hogar', 'icono': '🏠', 'slug': 'hogar'},
-        {'nombre': 'Deportes', 'icono': '⚽', 'slug': 'deportes'},
-        {'nombre': 'Moda', 'icono': '👕', 'slug': 'moda'},
-        {'nombre': 'Vehículos', 'icono': '🚗', 'slug': 'vehiculos'},
-        {'nombre': 'Libros', 'icono': '📚', 'slug': 'libros'},
-    ]
+    iconos = {
+        'Electrónica': '📱',
+        'Hogar': '🏠',
+        'Deportes': '⚽',
+        'Moda': '👕',
+        'Vehículos': '🚗',
+        'Alimentación': '🍎',
+    }
+
+    categorias_populares = []
+    for categoria in categorias:
+        categorias_populares.append({
+            'id': categoria.id,
+            'nombre': categoria.name,
+            'icono': iconos.get(categoria.name, '🛒'),
+        })
 
     return render(request, 'home.html', {
         'productos': productos_destacados,
         'categorias': categorias_populares,
     })
+
 
 
 

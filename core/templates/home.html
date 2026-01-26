@@ -28,7 +28,8 @@
         
         <div class="categories-grid">
             {% for categoria in categorias %}
-            <a href="#" class="category-card">
+            <a href="{% url 'catalog' %}?category={{ categoria.id }}" class="category-card">
+
                 <span class="category-icon">{{ categoria.icono }}</span>
                 <span class="category-name">{{ categoria.nombre }}</span>
             </a>
