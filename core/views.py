@@ -3,35 +3,54 @@ from .models import Product, Category
 
 
 
-
-from .models import Product, Category
-
 def home_view(request):
     productos_destacados = Product.objects.filter(is_sold=False)[:6]
     categorias = Category.objects.all()
 
     iconos = {
+        'Verduras y hortalizas': '🥕',
+        'Fruta de temporada': '🍎',
+        'Quesos artesanos': '🧀',
+        'Huevos de caserío': '🥚',
+        'Pan y harinas': '🌾',
+        'Mermeladas y conservas': '🍯',
+        'Txakoli y sidra': '🍾',
         'Electrónica': '📱',
         'Hogar': '🏠',
-        'Deportes': '⚽',
         'Moda': '👕',
         'Vehículos': '🚗',
-        'Alimentación': '🍎',
     }
 
-    categorias_populares = []
-    for categoria in categorias:
-        categorias_populares.append({
-            'id': categoria.id,
-            'nombre': categoria.name,
-            'icono': iconos.get(categoria.name, '🛒'),
-        })
+    ORDEN_CATEGORIAS = [
+        'Verduras y hortalizas',
+        'Fruta de temporada',
+        'Quesos artesanos',
+        'Huevos de caserío',
+        'Pan y harinas',
+        'Mermeladas y conservas',
+        'Txakoli y sidra',
+        'Electrónica',
+        'Hogar',
+        'Moda',
+        'Vehículos',
+    ]
+
+    categorias_dict = {c.name: c for c in categorias}
+
+    categorias_ordenadas = []
+    for nombre in ORDEN_CATEGORIAS:
+        if nombre in categorias_dict:
+            categoria = categorias_dict[nombre]
+            categorias_ordenadas.append({
+                'id': categoria.id,
+                'name': categoria.name,
+                'icono': iconos.get(categoria.name, '🛒'),
+            })
 
     return render(request, 'home.html', {
         'productos': productos_destacados,
-        'categorias': categorias_populares,
+        'categorias': categorias_ordenadas,
     })
-
 
 
 
@@ -40,12 +59,11 @@ def home_view(request):
 
 def catalog_view(request):
     products = Product.objects.filter(is_sold=False)
+    categories = Category.objects.all()
 
-    category_id = request.GET.get('category')
+    category_id = request.GET.get('category')  
     if category_id:
         products = products.filter(category_id=category_id)
-
-    categories = Category.objects.all()
 
     return render(request, 'catalog.html', {
         'products': products,
