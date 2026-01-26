@@ -3,41 +3,67 @@
 
 {% block title %}Catálogo - Bizkaipop{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product.css' %}">
+{% endblock %}
+
+
 {% block content %}
 <section class="products-section">
     <div class="container">
-        <div class="section-header">
+
+        <!-- CABECERA DEL CATÁLOGO -->
+        <div class="catalog-header">
             <h2 class="section-title">Catálogo de productos</h2>
+
+            <form method="get" class="catalog-filters">
+                <select name="category" class="filter-select">
+                    <option value="">Todas las categorías</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">
+                            {{ category.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <button class="btn btn-outline filter-btn">
+                    Filtrar
+                </button>
+            </form>
         </div>
 
+        <!-- GRID DE PRODUCTOS -->
         <div class="products-grid">
             {% for product in products %}
             <div class="product-card">
+
                 <div class="product-image">
                     {% if product.images.first %}
-                    <img src="{{ product.images.first.image.url }}" alt="{{ product.title }}">
-                      {% else %}
-                      <img src="https://via.placeholder.com/300x200?text=Producto" alt="Sin imagen">
-                      {% endif %}
+                        <img src="{{ product.images.first.image.url }}" alt="{{ product.title }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300x200?text=Producto" alt="Sin imagen">
+                    {% endif %}
                 </div>
 
                 <div class="product-info">
                     <h3 class="product-title">{{ product.title }}</h3>
                     <p class="product-location">📍 {{ product.location }}</p>
-                    <p class="product-price">{{ product.price }}€</p>
+                    <p class="product-price">{{ product.price }} €</p>
                 </div>
 
                 <div class="product-actions">
-                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary btn-block">
+                    <a href="{% url 'product_detail' product.id %}"
+                       class="btn btn-primary btn-block">
                         Ver detalles
                     </a>
                 </div>
+
             </div>
             {% empty %}
-            <p>No hay productos disponibles.</p>
+                <p>No hay productos disponibles.</p>
             {% endfor %}
         </div>
+
     </div>
 </section>
 {% endblock %}
-

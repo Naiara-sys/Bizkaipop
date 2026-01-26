@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product
+from .models import Product, Category
 
 # Create your views here.
 #itslucyax
@@ -29,8 +29,16 @@ def home_view(request):
 
 def catalog_view(request):
     products = Product.objects.filter(is_sold=False)
+
+    category_id = request.GET.get('category')
+    if category_id:
+        products = products.filter(category_id=category_id)
+
+    categories = Category.objects.all()
+
     return render(request, 'catalog.html', {
-        'products': products
+        'products': products,
+        'categories': categories,
     })
 
 

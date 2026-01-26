@@ -107,3 +107,34 @@
     cursor: pointer;
     user-select: none;
 }
+
+/* ===== FILTROS CATÁLOGO ===== */
+
+.catalog-filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-select {
+    padding: 0.75rem 1rem;
+    min-width: 220px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.filter-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+}
