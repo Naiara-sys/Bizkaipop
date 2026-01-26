@@ -1,0 +1,51 @@
+<!--itslucyax-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bizkaipop - Marketplace local de Bizkaia. Compra y vende productos de segunda mano.">
+    <title>{% block title %}Bizkaipop - Marketplace de Bizkaia{% endblock %}</title>
+    
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    
+    <!-- CSS específico de cada página -->
+    {% block extra_css %}{% endblock %}
+    
+    <!-- Favicon (opcional - añadir después) -->
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+</head>
+<body>
+    <!-- Header (Dev 1 creará este componente) -->
+    {% include 'components/header.html' %}
+    
+    <!-- Mensajes de Django (para errores/éxito) -->
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="message message-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <!-- Contenido principal de cada página -->
+    <main class="main-content">
+        {% block content %}
+        <!-- Aquí va el contenido de cada página específica -->
+        {% endblock %}
+    </main>
+    
+    <!-- Footer (Dev 2 creará este componente) -->
+    {% include 'components/footer.html' %}
+    
+    <!-- JavaScript Global -->
+    <script src="{% static 'js/main.js' %}"></script>
+    
+    <!-- JavaScript específico de cada página -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
