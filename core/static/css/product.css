@@ -190,3 +190,15 @@
     color: #444;
     line-height: 1.5;
 }
+
+.product-producer {
+    font-size: 0.9rem;
+    color: #4b5563;
+    margin: 0.25rem 0 0.5rem;
+}
+
+.eco-text {
+    color: #15803d;  
+    font-weight: 600;
+    font-size: 0.85rem;
+}
