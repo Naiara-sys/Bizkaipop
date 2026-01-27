@@ -9,6 +9,15 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class Producer(models.Model):
+    name = models.CharField(max_length=150)
+    municipality = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    is_ecological = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.name} · {self.municipality}"
+
 
 class Product(models.Model):
     seller = models.ForeignKey(
@@ -16,6 +25,15 @@ class Product(models.Model):
         on_delete=models.CASCADE,
         related_name='products'
     )
+
+    producer = models.ForeignKey(
+        Producer,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='products'
+    )
+
     title = models.CharField(max_length=200)
     description = models.TextField()
     price = models.DecimalField(max_digits=8, decimal_places=2)
@@ -31,6 +49,7 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
 
 
 class ProductImage(models.Model):

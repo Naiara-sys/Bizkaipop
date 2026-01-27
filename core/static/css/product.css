@@ -144,3 +144,49 @@
     display: block;
     margin-bottom: 0.5rem;
 }
+
+
+/* ===== PRODUCTOR ===== */
+
+.product-producer {
+    margin-top: 2.5rem;
+    padding: 1.5rem 1.75rem;
+    background: #f3faf5;
+    border-radius: 16px;
+    border: 1px solid #dfeee4;
+    text-align: center;
+}
+
+.product-producer h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    color: #2e7d32;
+}
+
+.producer-name {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.producer-location {
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.eco-badge {
+    display: inline-block;
+    margin: 0.5rem 0;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background-color: #2e7d32;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.producer-description {
+    margin-top: 0.75rem;
+    font-style: italic;
+    color: #444;
+    line-height: 1.5;
+}
