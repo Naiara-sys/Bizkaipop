@@ -150,7 +150,7 @@ if 'RAILWAY_ENVIROMENT' in os.environ or 'RENDER' in os.environ:
     CSRF_COOKIE_SECURE = True
 else:
     #Config desarrollo local
-    DEBUG = True
+    DEBUG = False
 
 
 STATIC_URL = '/static/'
