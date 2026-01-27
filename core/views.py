@@ -22,6 +22,11 @@ def home_view(request):
         'categorias': categorias_populares,
     })
 
+# ===== DEV 2: CONTACTO =====
+
+def contacto_view(request):
+    return render(request,'components/contacto.html') 
+
 
 
 
