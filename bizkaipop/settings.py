@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config #itslucyax
+import os #itslucyax
+import dj_database_url #itslucyax
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)4bx*itix@2)ne369v-(86dzq)7f*-m(hlcj0*f9+gaapwnxlv'
+SECRET_KEY = config('SECRET_KEY', default='dngo-insecure-)4bx*itix@2)ne369v-(86dzq)7f*-m(hlcj0*f9+gaapwnxlv')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True - estaria hardcoreado
+DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
 
 
 # Application definition
@@ -42,7 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', #itslucyax
+    'whitjaenoise.middleware.WhiteNoiseMiddleware', #itslucyax
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -76,10 +80,10 @@ WSGI_APPLICATION = 'bizkaipop.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config (
+        default=config('DATABASE_URL', default='sqlite:///db.sqlite3'),
+        conn_max_age=600 #s de tiempo de vida de conexion
+    )
 }
 
 
@@ -105,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-es'
 
 TIME_ZONE = 'Europe/Madrid'
 
@@ -117,16 +121,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/' #ruta absoluta
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATTICFILES_DIRS = [
+    BASE_DIR / 'core' / 'static',
+]
 
+#MEDIA FILES (subidos de usuario)
+MEDIA_URL = '/media/'
+MEDIA_ROOT= BASE_DIR / 'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#LOGIN/LOGOUT URLs
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 #CONFIGURACION DEPLOYMENT
-import os
-import dj_database_url
 
 #Config archivos estaticos produccion
 STATTIC_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
