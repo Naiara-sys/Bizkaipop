@@ -1,0 +1,1 @@
+web: gunicorn bizkaipop.wsgi --log-file -
