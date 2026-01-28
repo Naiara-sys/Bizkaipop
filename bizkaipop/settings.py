@@ -28,8 +28,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-)4bx*itix@2)ne369v-(86dzq)7f*-m(hlcj0*f9+gaapwnxlv')
 #SECURIDAD AVISO: no correr con debug activado en produccion
 DEBUG = config('DEBUG', default=True, cast=bool)
-
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='django-insecure-)4bx*itix@2)ne369v-(86dzq)7f*-m(hlcj0*f9+gaapwnxlv').split(',')
+#Limpia espacios de cada host automaticamente
+ALLOWED_HOSTS = [h.strip() for h in config('ALLOWED_HOSTS', default='127.0.0.1,localhost').split(',')]
 
 
 # Application definition
