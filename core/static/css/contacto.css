@@ -1,0 +1,207 @@
+/* =========================
+   FONDO GENERAL
+   ========================= */
+.contact-page {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+        url("/static/img/BosqueFondo.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+/* =========================
+   CONTENEDOR PRINCIPAL
+   ========================= */
+.contact-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+
+    background: #fdfefe;
+    border-radius: 10px;
+    overflow: hidden;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+
+    animation: fadeIn 1.3s ease-out;
+}
+
+/* =========================
+   COLUMNA IZQUIERDA
+   ========================= */
+.contact-info {
+    flex: 1;
+    background: linear-gradient(160deg, #2e8b57, #3cb371);
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    padding: 55px 35px;
+}
+
+.info-content {
+    max-width: 300px;
+}
+
+/* =========================
+   ICONO USUARIO (MUY GRANDE)
+   ========================= */
+.user-icon {
+    margin-bottom: 40px;
+}
+
+.user-icon img {
+    width: 170px;
+    height: 170px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.35));
+    opacity: 0.98;
+}
+
+/* =========================
+   TEXTO INFO
+   ========================= */
+.contact-info h2 {
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 35px;
+}
+
+.contact-details p {
+    font-size: 14px;
+    margin: 14px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    opacity: 0.95;
+}
+
+/* =========================
+   COLUMNA DERECHA (FORM)
+   ========================= */
+.contact-container {
+    flex: 1.2;
+    padding: 45px 40px;
+    background: #ffffff;
+}
+
+.contact-container h2 {
+    font-size: 24px;
+    color: #2f4f3e;
+    margin-bottom: 35px;
+}
+
+/* =========================
+   FORMULARIO
+   ========================= */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 26px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #5f6f65;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+    border: none;
+    border-bottom: 1px solid #cfd8d3;
+    padding: 9px 0;
+    font-size: 15px;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.25s ease;
+}
+
+.form-group textarea {
+    min-height: 90px;
+    resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-bottom: 2px solid #3cb371;
+}
+
+/* =========================
+   BOTÓN
+   ========================= */
+.contact-btn {
+    margin-top: 10px;
+    align-self: flex-end;
+
+    background: linear-gradient(135deg, #3cb371, #2e8b57);
+    color: white;
+
+    border: none;
+    padding: 12px 34px;
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+    border-radius: 6px;
+
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.contact-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(46, 139, 87, 0.45);
+}
+
+/* =========================
+   ANIMACIÓN
+   ========================= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(45px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 768px) {
+    .contact-wrapper {
+        flex-direction: column;
+    }
+
+    .contact-info {
+        padding: 40px 25px;
+    }
+
+    .user-icon img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .contact-container {
+        padding: 35px 25px;
+    }
+
+    .contact-btn {
+        width: 100%;
+        align-self: center;
+    }
+}

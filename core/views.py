@@ -58,6 +58,11 @@ def home_view(request):
         'producers': producers,
     })
 
+# ===== DEV 2: CONTACTO =====
+
+def contacto_view(request):
+    return render(request,'components/contacto.html') 
+
 
 # ===== DEV 3: CATÁLOGO =====
 
