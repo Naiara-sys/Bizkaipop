@@ -167,18 +167,21 @@ else:
 
 
 STATIC_URL = '/static/'
-STATTIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIR = [
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [
     BASE_DIR / 'core' / 'static',
 ]
 
+# Media files (User uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# Login settings
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

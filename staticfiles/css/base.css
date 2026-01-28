@@ -9,10 +9,6 @@
     box-sizing: border-box;
 }
 
-body {
-    min-width: 390px;
-}
-
 :root {
     /* Colores principales */
     --color-primary: #00A651;      /* Verde Euskadi */
@@ -399,7 +395,3 @@ a:hover {
         gap: var(--spacing-sm);
     }
 }
-
-
-
-

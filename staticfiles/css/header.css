@@ -76,7 +76,7 @@ header input[type="checkbox"]:checked ~ nav {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.3);
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s;
@@ -84,7 +84,7 @@ header input[type="checkbox"]:checked ~ nav {
 }
 
 header input[type="checkbox"]:checked ~ .header-overlay-backdrop-closer {
-  opacity: 0;
+  opacity: 1;
   visibility: visible;
 }
 
@@ -181,9 +181,8 @@ header nav ul li:hover {
   }
 
   .header-user-authentication-area {
-    flex-direction: column;
+    flex-direction: row;
     gap: 5px;
-    margin-left: auto;
   }
 
   .header-user-authentication-area a {
