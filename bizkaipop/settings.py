@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'bizkaipop.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config (
-        default=config('DATABASE_URL', default=''sqlite:///db.sqlite3'),
+        default=config('DATABASE_URL', default='sqlite:///db.sqlite3'),
         conn_max_age=600 #tiempo validz en segundos
     )
 }
@@ -121,7 +121,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-
+# Si añades carpetas de static en core/static Django las encontrara
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_DIRS = [
@@ -168,3 +168,9 @@ if 'RAILWAY_ENVIROMENT' in os.environ or 'RENDER' in os.environ:
             conn_max_age=600,
             con_health_checks=True
         )
+        
+    #Seguridad forzada en produccion
+    DEBUG = False
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
