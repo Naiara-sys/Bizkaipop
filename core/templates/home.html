@@ -3,7 +3,9 @@
 {% load static %}
 
 {% block title %}Inicio - Bizkaipop{% endblock %}
-
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/map.css' %}">
+{% endblock %}
 {% block content %}
 <!-- Hero Section -->
 <section class="hero">
@@ -58,10 +60,22 @@
         </div>
         
         <div class="product-info">
-            <h3 class="product-title">{{ producto.title }}</h3>
-            <p class="product-location">📍 {{ producto.location }}</p>
-            <p class="product-price">{{ producto.price }}€</p>
-        </div>
+    <h3 class="product-title">{{ producto.title }}</h3>
+
+    {% if producto.producer %}
+        <p class="product-producer">
+            {{ producto.producer.name }} · {{ producto.producer.municipality }}
+            {% if producto.producer.is_ecological %}
+                <span class="eco-text">🌱</span>
+            {% endif %}
+        </p>
+    {% endif %}
+
+    <p class="product-price">
+    {{ producto.price }}€ / {{ producto.get_unit_display }}
+</p>
+</div>
+
         
         <div class="product-actions">
             <a href="{% url 'product_detail' producto.id %}" class="btn btn-primary btn-block">
@@ -74,7 +88,17 @@
 
     </div>
 </section>
+<!-- Mapa de Baserris -->
+<section class="map-section">
+    <div class="container">
+        <h2 class="section-title">Nuestros baserris en Bizkaia</h2>
+        <p class="section-subtitle">
+            Productos locales directamente del caserío a tu mesa.
+        </p>
 
+        <div id="map" class="baserri-map"></div>
+    </div>
+</section>
 <!-- Call to Action -->
 <section class="cta-section">
     <div class="container">
@@ -88,3 +112,19 @@
     </div>
 </section>
 {% endblock %}
+{% block extra_js %}
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    const map = L.map('map').setView([43.2194, -2.9856], 9);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+</script>
+{% endblock %}
+

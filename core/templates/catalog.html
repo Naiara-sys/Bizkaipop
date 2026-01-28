@@ -28,7 +28,7 @@
             <label class="filter-checkbox">
                 <input type="checkbox" name="eco" value="1"
                {% if request.GET.eco %}checked{% endif %}>
-                🌱 Solo productos ecológicos
+                 Solo productos ecológicos
             </label>
                 <button class="btn btn-outline filter-btn">
                     Filtrar
@@ -54,14 +54,14 @@
 
    {% if product.producer %}
     <p class="product-producer">
-        🏡 {{ product.producer.name }} · {{ product.producer.municipality }}
+         {{ product.producer.name }} · {{ product.producer.municipality }}
         {% if product.producer.is_ecological %}
             · <span class="eco-text">Producto Ecológico</span>
         {% endif %}
     </p>
 {% endif %}
 
-    <p class="product-price">{{ product.price }}€</p>
+    <p class="product-price">{{ product.price }}€ / {{ product.unit }}</p>
 </div>
 
                 <div class="product-actions">
