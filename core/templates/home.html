@@ -125,6 +125,31 @@
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap'
     }).addTo(map);
+
+    // === BASERRIS DESDE DJANGO ===
+    const baserris = [
+        {% for producer in producers %}
+        {
+            name: "{{ producer.name|escapejs }}",
+            municipality: "{{ producer.municipality|escapejs }}",
+            eco: {{ producer.is_ecological|yesno:"true,false" }},
+            lat: {{ producer.latitude }},
+            lng: {{ producer.longitude }}
+        },
+        {% endfor %}
+    ];
+
+    baserris.forEach(b => {
+        const popup = `
+            <strong>${b.name}</strong><br>
+            ${b.municipality}<br>
+            ${b.eco ? '🌱 Producción ecológica' : ''}
+        `;
+
+        L.marker([b.lat, b.lng])
+            .addTo(map)
+            .bindPopup(popup);
+    });
 </script>
 {% endblock %}
 
