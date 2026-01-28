@@ -1,71 +1,57 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product
+from .models import Product, Category
 
-# Create your views here.
-#itslucyax
 
 
 def home_view(request):
-    productos_destacados = [
-        {
-            'id': 1,
-            'titulo': 'Bicicleta de montaña',
-            'precio': 250.00,
-            'ubicacion': 'Bilbao',
-            'imagen': 'https://via.placeholder.com/300x200?text=Bicicleta'
-        },
-        {
-            'id': 2,
-            'titulo': 'iPhone 12 Pro',
-            'precio': 450.00,
-            'ubicacion': 'Getxo',
-            'imagen': 'https://via.placeholder.com/300x200?text=iPhone'
-        },
-        {
-            'id': 3,
-            'titulo': 'Mesa de comedor',
-            'precio': 120.00,
-            'ubicacion': 'Barakaldo',
-            'imagen': 'https://via.placeholder.com/300x200?text=Mesa'
-        },
-        {
-            'id': 4,
-            'titulo': 'PlayStation 5',
-            'precio': 380.00,
-            'ubicacion': 'Bilbao',
-            'imagen': 'https://via.placeholder.com/300x200?text=PS5'
-        },
-        {
-            'id': 5,
-            'titulo': 'Guitarra eléctrica',
-            'precio': 200.00,
-            'ubicacion': 'Durango',
-            'imagen': 'https://via.placeholder.com/300x200?text=Guitarra'
-        },
-        {
-            'id': 6,
-            'titulo': 'Cafetera Nespresso',
-            'precio': 60.00,
-            'ubicacion': 'Bilbao',
-            'imagen': 'https://via.placeholder.com/300x200?text=Cafetera'
-        },
-    ]
-    #CAMBIAR ICONOS
-    categorias_populares = [
-        {'nombre': 'Electrónica', 'icono': '📱', 'slug': 'electronica'},
-        {'nombre': 'Hogar', 'icono': '🏠', 'slug': 'hogar'},
-        {'nombre': 'Deportes', 'icono': '⚽', 'slug': 'deportes'},
-        {'nombre': 'Moda', 'icono': '👕', 'slug': 'moda'},
-        {'nombre': 'Vehículos', 'icono': '🚗', 'slug': 'vehiculos'},
-        {'nombre': 'Libros', 'icono': '📚', 'slug': 'libros'},
-    ]
-    
-    context = {
-        'productos': productos_destacados,
-        'categorias': categorias_populares,
+    productos_destacados = Product.objects.filter(is_sold=False)[:6]
+    categorias = Category.objects.all()
+
+    iconos = {
+        'Verduras y hortalizas': '🥕',
+        'Fruta de temporada': '🍎',
+        'Quesos artesanos': '🧀',
+        'Huevos de caserío': '🥚',
+        'Pan y harinas': '🌾',
+        'Mermeladas y conservas': '🍯',
+        'Txakoli y sidra': '🍾',
+        'Electrónica': '📱',
+        'Hogar': '🏠',
+        'Moda': '👕',
+        'Vehículos': '🚗',
     }
-    
-    return render(request, 'home.html', context)
+
+    ORDEN_CATEGORIAS = [
+        'Verduras y hortalizas',
+        'Fruta de temporada',
+        'Quesos artesanos',
+        'Huevos de caserío',
+        'Pan y harinas',
+        'Mermeladas y conservas',
+        'Txakoli y sidra',
+        'Electrónica',
+        'Hogar',
+        'Moda',
+        'Vehículos',
+    ]
+
+    categorias_dict = {c.name: c for c in categorias}
+
+    categorias_ordenadas = []
+    for nombre in ORDEN_CATEGORIAS:
+        if nombre in categorias_dict:
+            categoria = categorias_dict[nombre]
+            categorias_ordenadas.append({
+                'id': categoria.id,
+                'name': categoria.name,
+                'icono': iconos.get(categoria.name, '🛒'),
+            })
+
+    return render(request, 'home.html', {
+        'productos': productos_destacados,
+        'categorias': categorias_ordenadas,
+    })
+
 
 
 
@@ -73,8 +59,15 @@ def home_view(request):
 
 def catalog_view(request):
     products = Product.objects.filter(is_sold=False)
+    categories = Category.objects.all()
+
+    category_id = request.GET.get('category')  
+    if category_id:
+        products = products.filter(category_id=category_id)
+
     return render(request, 'catalog.html', {
-        'products': products
+        'products': products,
+        'categories': categories,
     })
 
 

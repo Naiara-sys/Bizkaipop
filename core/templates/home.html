@@ -28,10 +28,10 @@
         
         <div class="categories-grid">
             {% for categoria in categorias %}
-            <a href="#" class="category-card">
-                <span class="category-icon">{{ categoria.icono }}</span>
-                <span class="category-name">{{ categoria.nombre }}</span>
-            </a>
+           <a href="{% url 'catalog' %}?category={{ categoria.id }}" class="category-card">
+    <span class="category-icon">{{ categoria.icono }}</span>
+    <span class="category-name">{{ categoria.name }}</span>
+</a>
             {% endfor %}
         </div>
     </div>
@@ -45,28 +45,33 @@
             <a href="{% url 'catalog' %}" class="btn btn-outline">Ver todos</a>
         </div>
         
-        <div class="products-grid">
-            {% for producto in productos %}
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="{{ producto.imagen }}" alt="{{ producto.titulo }}">
-                    <span class="product-badge">Destacado</span>
-                </div>
-                
-                <div class="product-info">
-                    <h3 class="product-title">{{ producto.titulo }}</h3>
-                    <p class="product-location">📍 {{ producto.ubicacion }}</p>
-                    <p class="product-price">{{ producto.precio }}€</p>
-                </div>
-                
-                <div class="product-actions">
-                    <a href="{% url 'product_detail' producto.id %}" class="btn btn-primary btn-block">
-                    Ver detalles
-                    </a>
-                </div>
-            </div>
-            {% endfor %}
+       <div class="products-grid">
+    {% for producto in productos %}
+    <div class="product-card">
+        <div class="product-image">
+            {% if producto.images.first %}
+                <img src="{{ producto.images.first.image.url }}" alt="{{ producto.title }}">
+            {% else %}
+                <img src="https://via.placeholder.com/300x200?text=Producto" alt="Sin imagen">
+            {% endif %}
+            <span class="product-badge">Destacado</span>
         </div>
+        
+        <div class="product-info">
+            <h3 class="product-title">{{ producto.title }}</h3>
+            <p class="product-location">📍 {{ producto.location }}</p>
+            <p class="product-price">{{ producto.price }}€</p>
+        </div>
+        
+        <div class="product-actions">
+            <a href="{% url 'product_detail' producto.id %}" class="btn btn-primary btn-block">
+                Ver detalles
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
     </div>
 </section>
 

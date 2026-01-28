@@ -3,6 +3,10 @@
 
 {% block title %}{{ product.title }} - Bizkaipop{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/product.css' %}">
+{% endblock %}
+
 {% block content %}
 <section class="product-detail">
     <div class="container">
@@ -12,18 +16,41 @@
         </a>
 
         <div class="product-detail-grid">
-            <!-- Imágenes -->
+
+            
             <div class="product-detail-images">
+
                 {% if product.images.all %}
-                    {% for img in product.images.all %}
-                        <img src="{{ img.image.url }}" alt="{{ product.title }}">
-                    {% endfor %}
+
+                    
+                    <div class="main-image">
+                        <img 
+                            id="mainProductImage"
+                            src="{{ product.images.first.image.url }}"
+                            alt="{{ product.title }}"
+                            onclick="openModal(this.src)"
+                        >
+                    </div>
+
+                    <!-- Miniaturas -->
+                    <div class="thumbnail-images">
+                        {% for img in product.images.all %}
+                            <img 
+                                src="{{ img.image.url }}"
+                                alt="{{ product.title }}"
+                                onclick="openModal(this.src)"
+                            >
+                        {% endfor %}
+                    </div>
                 {% else %}
-                    <img src="https://via.placeholder.com/400x300?text=Sin+imagen">
+                    <div class="main-image">
+                        <img src="https://via.placeholder.com/400x300?text=Sin+imagen">
+                    </div>
                 {% endif %}
+
             </div>
 
-            <!-- Info -->
+            <!-- INFO -->
             <div class="product-detail-info">
                 <h1>{{ product.title }}</h1>
                 <p class="product-price">{{ product.price }} €</p>
@@ -34,12 +61,62 @@
                     <p>{{ product.description }}</p>
                 </div>
 
+                {% if product.producer %}
+                <div class="product-producer">
+                     <h3>Productor</h3>
+
+                        <p class="producer-name">
+                        🌾 <strong>{{ product.producer.name }}</strong>
+                        </p>
+
+                        <p class="producer-location">
+                        📍 {{ product.producer.municipality }}
+                        </p>
+
+                        {% if product.producer.is_ecological %}
+                         <p class="eco-badge">🌱 Producción ecológica</p>
+                        {% endif %}
+
+                        {% if product.producer.description %}
+                    <p class="producer-description">
+                  {{ product.producer.description }}
+        </p>
+    {% endif %}
+</div>
+{% endif %}
+
+
+
+                
                 <button class="btn btn-primary btn-large">
                     Contactar con el vendedor
                 </button>
             </div>
-        </div>
 
+        </div>
     </div>
 </section>
+
+<!-- MODAL -->
+<div id="imageModal" class="image-modal">
+    <span class="close-modal" onclick="closeModal()">×</span>
+    <img id="modalImage">
+</div>
+
+<!-- Javascript -->
+<script>
+function openModal(src) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    modal.style.display = 'flex';
+    modalImg.src = src;
+}
+
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+}
+</script>
+
 {% endblock %}
+
