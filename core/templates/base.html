@@ -10,12 +10,25 @@
     
     <!-- CSS Global -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     
     <!-- CSS específico de cada página -->
     {% block extra_css %}{% endblock %}
     
     <!-- Favicon (opcional - añadir después) -->
     <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+
+    <link
+         rel="stylesheet"
+         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+
+
 </head>
 <body>
     <!-- Header (Dev 1 creará este componente) -->

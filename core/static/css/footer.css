@@ -20,6 +20,7 @@
 
 .footer-section ul {
     list-style: none;
+    padding: 0;
 }
 
 .footer-section ul li {
@@ -28,6 +29,8 @@
 
 .footer-section a {
     color: var(--color-light-gray);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .footer-section a:hover {

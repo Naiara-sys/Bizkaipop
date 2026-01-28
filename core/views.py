@@ -1,11 +1,16 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product, Category
+from .models import Product, Category, Producer
 
 
-
+# ===== DEV 3: CAMBIOS CATÁLOGO =====
 def home_view(request):
     productos_destacados = Product.objects.filter(is_sold=False)[:6]
     categorias = Category.objects.all()
+
+    producers = Producer.objects.exclude(
+        latitude__isnull=True,
+        longitude__isnull=True
+    )
 
     iconos = {
         'Verduras y hortalizas': '🥕',
@@ -50,9 +55,13 @@ def home_view(request):
     return render(request, 'home.html', {
         'productos': productos_destacados,
         'categorias': categorias_ordenadas,
+        'producers': producers,
     })
 
+# ===== DEV 2: CONTACTO =====
 
+def contacto_view(request):
+    return render(request,'components/contacto.html') 
 
 
 # ===== DEV 3: CATÁLOGO =====
@@ -61,7 +70,7 @@ def catalog_view(request):
     products = Product.objects.filter(is_sold=False)
     categories = Category.objects.all()
 
-    category_id = request.GET.get('category')  
+    category_id = request.GET.get('category')
     if category_id:
         products = products.filter(category_id=category_id)
 

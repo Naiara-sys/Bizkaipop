@@ -1,30 +1,35 @@
-<!--itslucyax-->
 {% load static %}
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/header.css' %}">
-{% endblock %}
-<!-- Header temporal - Dev 1 completará esto -->
-<header class="header">
-    <div class="container">
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <a href="{% url 'home' %}" class="logo">
-                    <span class="logo-icon">🛒</span>
-                    <span class="logo-text">Bizkaipop</span>
-                </a>
-            </div>
-            
-            <div class="navbar-menu">
-                <a href="{% url 'home' %}" class="nav-link">Inicio</a>
-                <a href="#" class="nav-link">Catálogo</a>
-                <a href="#" class="nav-link">Publicar</a>
-            </div>
-            
-            <div class="navbar-actions">
-                <!-- Dev 1 añadirá aquí los botones de Login/Registro -->
-                <a href="#" class="btn btn-outline">Iniciar sesión</a>
-                <a href="#" class="btn btn-primary">Registrarse</a>
-            </div>
-        </nav>
+
+<header class="main-site-header-container">
+  <div class="header-top-bar-wrapper">
+    <a href="{% url 'home' %}" class="header-brand-logo-link">
+       <img src="{% static 'img/logo.png' %}" alt="Bizkaipop" class="header-brand-logo-image">
+    </a>
+    
+    <div class="header-category-button-wrapper">
+      <input type="checkbox" id="category-menu-state-checkbox" class="header-hidden-state-controller">
+      <label for="category-menu-state-checkbox" class="header-category-menu-toggle-button">
+        ☰ Categorías
+      </label>
+      <nav class="header-category-dropdown-menu-container">
+        <ul class="header-dropdown-list">
+          <li class="header-dropdown-item"><a href="#" class="header-dropdown-link">Electrónica</a></li>
+          <li class="header-dropdown-item"><a href="#" class="header-dropdown-link">Ropa</a></li>
+          <li class="header-dropdown-item"><a href="#" class="header-dropdown-link">Hogar</a></li>
+          <li class="header-dropdown-item"><a href="#" class="header-dropdown-link">Deportes</a></li>
+          <li class="header-dropdown-item"><a href="#" class="header-dropdown-link">Libros</a></li>
+        </ul>
+      </nav>
+      <label for="category-menu-state-checkbox" class="header-overlay-backdrop-closer"></label>
     </div>
+
+    <div class="header-search-bar-container">
+      <input type="text" placeholder="Buscar productos..." class="header-search-input-field">
+    </div>
+
+    <div class="header-user-authentication-area">
+      <a href="#" class="header-action-button header-action-button-outline">Iniciar sesión</a>
+      <a href="#" class="header-action-button header-action-button-primary">Registrarse</a>
+    </div>
+  </div>
 </header>

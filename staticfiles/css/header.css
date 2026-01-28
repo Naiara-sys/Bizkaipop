@@ -1,0 +1,192 @@
+/* Contenedor principal del header */
+header {
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px 20px;
+}
+
+header > div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Logo a la izquierda */
+header a img {
+  height: 70px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Contenedor del menú desplegable */
+header > div > div:first-of-type {
+  position: relative;
+}
+
+/* Checkbox oculto para el menú desplegable */
+header input[type="checkbox"] {
+  display: none;
+}
+
+/* Botón del menú de categorías */
+header label {
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 0.3s;
+}
+
+header label:hover {
+  background-color: #e0e0e0;
+}
+
+/* Navegación del menú desplegable */
+header nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  margin-top: 10px;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+/* Mostrar menú cuando el checkbox está marcado */
+header input[type="checkbox"]:checked ~ nav {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Backdrop del menú */
+.header-overlay-backdrop-closer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+  z-index: 999;
+}
+
+header input[type="checkbox"]:checked ~ .header-overlay-backdrop-closer {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Lista del menú */
+header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+}
+
+header nav ul li {
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+header nav ul li:hover {
+  background-color: #f5f5f5;
+}
+
+/* Barra de búsqueda en el centro (ocupa espacio restante) */
+.header-search-bar-container {
+  flex: 1;
+  display: flex;
+}
+
+.header-search-input-field {
+  width: 100%;
+  padding: 10px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.header-search-input-field:focus {
+  border-color: #4CAF50;
+}
+
+.header-search-input-field::placeholder {
+  color: #999;
+}
+
+/* Botones de autenticación a la derecha (apilados) */
+.header-user-authentication-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.header-user-authentication-area a {
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.3s;
+}
+
+.header-user-authentication-area a:first-child {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.header-user-authentication-area a:first-child:hover {
+  background-color: #45a049;
+}
+
+.header-user-authentication-area a:last-child {
+  background-color: transparent;
+  color: #4CAF50;
+  border: 2px solid #4CAF50;
+}
+
+.header-user-authentication-area a:last-child:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Responsive: tablets y móviles */
+@media (max-width: 768px) {
+  header > div {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .header-search-bar-container {
+    order: 3;
+    width: 100%;
+    flex: none;
+  }
+
+  .header-user-authentication-area {
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .header-user-authentication-area a {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
