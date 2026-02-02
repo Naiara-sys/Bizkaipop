@@ -1,0 +1,120 @@
+/* ================================
+   CATÁLOGO DE PRODUCTOS (Dev 3)
+   ================================ */
+
+/* ===== CONTENEDOR GENERAL ===== */
+.products-section {
+    padding: 3rem 0;
+}
+
+/* ===== GRID DE PRODUCTOS ===== */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+/* ===== TARJETA DE PRODUCTO ===== */
+.product-card {
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== IMAGEN DEL PRODUCTO ===== */
+.product-image {
+    height: 180px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===== INFORMACIÓN DEL PRODUCTO ===== */
+.product-info {
+    padding: 1rem 1.2rem;
+}
+
+.product-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.3rem;
+}
+
+.product-producer {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+.eco-text {
+    color: #16a34a;
+    font-weight: 600;
+}
+
+/* ===== PRECIO ===== */
+.product-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #16a34a;
+    margin-bottom: 0.8rem;
+}
+
+/* ===== ACCIONES ===== */
+.product-actions {
+    padding: 0 1.2rem 1.2rem;
+}
+
+.product-actions .btn {
+    width: 100%;
+}
+
+/* ===== FILTROS ===== */
+.catalog-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.catalog-filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.filter-select {
+    padding: 0.75rem 1rem;
+    min-width: 200px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    cursor: pointer;
+}
+
+.filter-btn {
+    padding: 0.75rem 1.5rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-image {
+        height: 220px;
+    }
+}

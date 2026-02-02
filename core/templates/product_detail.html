@@ -65,7 +65,7 @@
                      <h3>Productor</h3>
 
                         <p class="producer-name">
-                        🌾 <strong>{{ product.producer.name }}</strong>
+                         <strong>{{ product.producer.name }}</strong>
                         </p>
 
                         <p class="producer-location">
@@ -73,7 +73,7 @@
                         </p>
 
                         {% if product.producer.is_ecological %}
-                         <p class="eco-badge">🌱 Producción ecológica</p>
+                         <p class="eco-badge"> Producción ecológica</p>
                         {% endif %}
 
                         {% if product.producer.description %}
@@ -99,10 +99,7 @@
 {% endif %}
 
                 
-                <button class="btn btn-primary btn-large">
-                    Contactar con el vendedor
-                </button>
-            </div>
+                <div class="contact-seller"> <button class="btn btn-primary btn-large"> Contactar con el vendedor </button> </div>
 
         </div>
     </div>
