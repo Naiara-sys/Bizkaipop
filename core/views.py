@@ -1,62 +1,56 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Product, Category, Producer
-
+#from django.http import HttpResponse #pruebas server
 
 # ===== DEV 3: CAMBIOS CATÁLOGO =====
+"""
+#Pruebas server itslucyax
 def home_view(request):
-    productos_destacados = Product.objects.filter(is_sold=False)[:6]
-    categorias = Category.objects.all()
-
-    producers = Producer.objects.exclude(
-        latitude__isnull=True,
-        longitude__isnull=True
-    )
+    return HttpResponse("<h1>¡Servidor OK!</h1><p>Si ves esto, tu configuración de Dev 4 es perfecta. El fallo es el HTML.</p>")
+"""
+def home_view(request):
+    # Obtenemos los datos con nombres que el HTML entienda
+    #products = Product.objects.filter(is_sold=False)[:6]
+    products = Product.objects.all()[:6]
+    categories = Category.objects.all()
+    
+    try:
+        # Importante: el HTML espera 'producers' para el mapa
+        producers = Producer.objects.exclude(latitude__isnull=True, longitude__isnull=True)
+    except Exception:
+        producers = []
 
     iconos = {
-        'Verduras y hortalizas': '🥕',
-        'Fruta de temporada': '🍎',
-        'Quesos artesanos': '🧀',
-        'Huevos de caserío': '🥚',
-        'Pan y harinas': '🌾',
-        'Mermeladas y conservas': '🍯',
-        'Txakoli y sidra': '🍾',
-        'Electrónica': '📱',
-        'Hogar': '🏠',
-        'Moda': '👕',
-        'Vehículos': '🚗',
+        'Verduras y hortalizas': '🥕', 'Fruta de temporada': '🍎', 'Quesos artesanos': '🧀',
+        'Huevos de caserío': '🥚', 'Pan y harinas': '🌾', 'Mermeladas y conservas': '🍯',
+        'Txakoli y sidra' : '🍾', 'Electrónica': '📱', 'Hogar': '🏠', 'Moda': '👕', 'Vehiculos' : '🚗',
     }
-
-    ORDEN_CATEGORIAS = [
-        'Verduras y hortalizas',
-        'Fruta de temporada',
-        'Quesos artesanos',
-        'Huevos de caserío',
-        'Pan y harinas',
-        'Mermeladas y conservas',
-        'Txakoli y sidra',
-        'Electrónica',
-        'Hogar',
-        'Moda',
-        'Vehículos',
-    ]
-
-    categorias_dict = {c.name: c for c in categorias}
-
-    categorias_ordenadas = []
-    for nombre in ORDEN_CATEGORIAS:
-        if nombre in categorias_dict:
-            categoria = categorias_dict[nombre]
-            categorias_ordenadas.append({
-                'id': categoria.id,
-                'name': categoria.name,
-                'icono': iconos.get(categoria.name, '🛒'),
-            })
-
-    return render(request, 'home.html', {
-        'productos': productos_destacados,
-        'categorias': categorias_ordenadas,
+    #Pistas para el HTML
+    categorias_list = []
+    for cat in categories:
+        categorias_list.append({
+            'id': cat.id,
+            'name': cat.name,
+            'icono': iconos.get(cat.name, '🛒')
+        })
+    
+    context = {
+        'productos': products,    # Lo que espera el HTML ahora mismo
+        'products': products,     # Por si el HTML cambia
+        'productos_destacados': products,      # Nombre view anterior
+        'categorias': categorias_list, 
         'producers': producers,
-    })
+    }
+    """
+    context = {
+        'productos': products,    # Por si acaso usa 'productos'
+        'products': products,     # Por si el HTML usa 'products'
+        'categorias': categories, # Por si el HTML usa 'categorias'
+        'categories': categories, # Por si el HTML usa 'categories'
+        'producers': producers,   # La que usa el mapa
+    }
+    """
+    return render(request, 'home.html', context)
 
 # ===== DEV 2: CONTACTO =====
 
