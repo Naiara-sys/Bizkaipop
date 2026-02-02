@@ -124,7 +124,7 @@ USE_TZ = True
 # Si añades carpetas de static en core/static Django las encontrara
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATIC_DIRS = [
+STATICFILES_DIRS = [
     BASE_DIR / 'core' / 'static',
 ]
 
@@ -133,75 +133,40 @@ STATIC_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#LOGIN/LOGOUT URLs
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
-#CONFIGURACION DEPLOYMENT
-
-#Config archivos estaticos produccion
-STATTIC_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-#Config Railway/Render
-if 'RAILWAY_ENVIROMENT' in os.environ or 'RENDER' in os.environ:
-    #permitir dominio produccion
-    ALLOWED_HOSTS.append('.railway.app')
-    ALLOWED_HOSTS.append('.onrender.com')
-    
-    #usar BBDD produccion (si existe)
-    if 'DATABASE_URL' in os.environ:
-        DATABASES['default'] = dj_database_url.config(
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
-    #config seguridad produccion
-    DEBUG = False
-    SECURE_SSL:REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-else:
-    #Config desarrollo local
-    DEBUG = False
-
-
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIR = [
-    BASE_DIR / 'core' / 'static',
-]
-
-# Rutas de autenticación (Gestionadas por Dev 1- AIMAR)
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
-LOGIN_URL = 'register'
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
-
 # Media files (Imágenes subidas por usuarios para productos/perfil)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# LOGIN/LOGOUT URLs
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 # ==============================================================================
 # CONFIGURACIÓN AVANZADA DE DEPLOYMENT (No tocar sin avisar al Dev 4)
 # ==============================================================================
 
-#Optimizacion archivos estaticos
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Optimización archivos estáticos en producción (comentado para desarrollo)
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Config Railway/Render
 if 'RAILWAY_ENVIROMENT' in os.environ or 'RENDER' in os.environ:
-    #Dominios permitidos en la nube
+    # Permitir dominio producción
     ALLOWED_HOSTS.append('.railway.app')
     ALLOWED_HOSTS.append('.onrender.com')
     
-    if 'DATABASES_URL' in os.environ:
+    # Usar BBDD producción (si existe)
+    if 'DATABASE_URL' in os.environ:
         DATABASES['default'] = dj_database_url.config(
             conn_max_age=600,
-            con_health_checks=True
+            conn_health_checks=True,
         )
-        
-    #Seguridad forzada en produccion
+    
+    # Configuración seguridad producción
     DEBUG = False
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+    
+    # Activar compresión de estáticos en producción
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
