@@ -26,9 +26,18 @@
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto;">
         {% for prod in productos %}
             <div style="background: white; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; text-align: center; padding-bottom: 15px;">
-                <img src="https://via.placeholder.com/300x200?text=Bizkaipop" style="width: 100%;" alt="Producto">
-                <h3>{{ prod.title }}</h3>
-                <p style="font-weight: bold; color: #2d5a27;">{{ prod.price }}€</p>
+                {% if prod.images.first %}
+                    <img src="{{ prod.images.first.image.url }}" style="width: 100%; height: 200px; object-fit: cover;" alt="{{ prod.title }}">
+                {% else %}
+                    <div style="width: 100%; height: 200px; background: linear-gradient(135deg, #2d5a27 0%, #4a8c3f 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                        🛒
+                    </div>
+                {% endif %}
+                <h3 style="padding: 10px;">{{ prod.title }}</h3>
+                <p style="font-weight: bold; color: #2d5a27; margin: 0;">{{ prod.price }}€</p>
+                {% if prod.unit %}
+                    <p style="font-size: 0.9rem; color: #666; margin: 5px 0;">por {{ prod.unit }}</p>
+                {% endif %}
             </div>
         {% empty %}
             <p style="grid-column: 1/-1; text-align: center;">No hay productos disponibles actualmente.</p>
