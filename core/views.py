@@ -1,4 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from .models import Product, Category, Producer
 #from django.http import HttpResponse #pruebas server
 
@@ -83,3 +85,54 @@ def product_detail_view(request, product_id):
 
 def publish_product_view(request):
     return render(request, 'publish_product.html')
+
+
+# ===== AUTENTICACIÓN =====
+
+def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            return render(request, 'login.html', {'error': 'Usuario o contraseña incorrectos'})
+    
+    return render(request, 'login.html')
+
+
+def register_view(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        
+        if password1 != password2:
+            return render(request, 'register.html', {'error': 'Las contraseñas no coinciden'})
+        
+        if User.objects.filter(username=username).exists():
+            return render(request, 'register.html', {'error': 'El nombre de usuario ya existe'})
+        
+        if User.objects.filter(email=email).exists():
+            return render(request, 'register.html', {'error': 'El email ya está registrado'})
+        
+        user = User.objects.create_user(username=username, email=email, password=password1)
+        login(request, user)
+        return redirect('home')
+    
+    return render(request, 'register.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
